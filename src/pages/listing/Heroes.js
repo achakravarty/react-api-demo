@@ -1,8 +1,8 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Grid from '../../components/Grid';
 import HeroCard from './HeroCard';
-import SuperheroService from './SuperheroService';
+import SuperheroService from '../../services/SuperheroService';
 
 class Heroes extends React.Component {
   constructor(props) {
@@ -11,7 +11,6 @@ class Heroes extends React.Component {
       characters: [],
     };
   }
-
 
   componentDidMount() {
     SuperheroService.getHeroes().then((heroes) => {
@@ -30,18 +29,7 @@ class Heroes extends React.Component {
   render() {
     const { characters } = this.state;
     return this.loading() || (
-      <Grid
-        style={{ marginTop: '1rem' }}
-        container
-        spacing={3}
-        justify="center"
-      >
-        {characters.map((character) => (
-          <Grid item xs={2} key={character.id}>
-            <HeroCard character={character} />
-          </Grid>
-        ))}
-      </Grid>
+      <Grid items={characters} render={(item) => <HeroCard character={item} />} />
     );
   }
 }

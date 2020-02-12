@@ -9,8 +9,9 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import Heroes from './Heroes';
-import Hero from './Hero';
+import Heroes from './pages/listing/Heroes';
+import Hero from './pages/details/Hero';
+import Series from './pages/series/Series';
 
 const App = () => (
   <div>
@@ -29,11 +30,13 @@ const App = () => (
         <Route path="/hero/:id">
           <Hero />
         </Route>
+        <Route path="/series/:id">
+          <Series />
+        </Route>
         <Route path="/">
           <Heroes />
         </Route>
       </Switch>
-
     </Router>
   </div>
 );

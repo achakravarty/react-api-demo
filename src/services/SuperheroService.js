@@ -3,7 +3,7 @@ const baseURL = 'https://gateway.marvel.com';
 
 class SuperheroService {
   static getHeroes() {
-    return fetch(`${baseURL}/v1/public/characters?series=9085&apikey=${apiKey}`)
+    return fetch(`${baseURL}/v1/public/characters?series=9085&apikey=${apiKey}&limit=60`)
       .then((res) => res.json())
       .then((res) => res.data.results);
   }

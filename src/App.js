@@ -9,8 +9,8 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import Heroes from './pages/listing/Heroes';
-import Hero from './pages/details/Hero';
+import Heroes from './pages/heroes/Heroes';
+import Hero from './pages/hero/Hero';
 import Series from './pages/series/Series';
 
 const App = () => (

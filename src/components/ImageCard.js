@@ -7,7 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
 const ImageCard = ({ title, image, onClick }) => (
-  <Card>
+  <Card elevation={2}>
     <CardActionArea onClick={onClick}>
       <CardMedia
         component="img"

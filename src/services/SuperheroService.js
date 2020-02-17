@@ -54,6 +54,43 @@ class SuperheroService {
       .then((res) => res.json())
       .then((res) => res.data.results);
   }
+
+  static getComicDetails(comicId) {
+    return fetch(`${baseURL}/v1/public/comics/${comicId}?apikey=${apiKey}`)
+      .then((res) => res.json())
+      .then((res) => res.data.results[0])
+      .then((res) => Promise.all(
+        [SuperheroService.getCharacters(comicId),
+          SuperheroService.getEvents(comicId),
+          SuperheroService.getStories(comicId)],
+      ).then(([characters, events, stories]) => ({
+        title: res.title,
+        description: res.description,
+        image: `${res.thumbnail.path}.${res.thumbnail.extension}`,
+        creators: res.creators.items.map((c) => ({ name: c.name })),
+        characters,
+        events,
+        stories,
+      })));
+  }
+
+  static getCharacters(comicId) {
+    return fetch(`${baseURL}/v1/public/comics/${comicId}/characters?apikey=${apiKey}`)
+      .then((res) => res.json())
+      .then((res) => res.data.results);
+  }
+
+  static getEvents(comicId) {
+    return fetch(`${baseURL}/v1/public/comics/${comicId}/events?apikey=${apiKey}`)
+      .then((res) => res.json())
+      .then((res) => res.data.results);
+  }
+
+  static getStories(comicId) {
+    return fetch(`${baseURL}/v1/public/comics/${comicId}/stories?apikey=${apiKey}`)
+      .then((res) => res.json())
+      .then((res) => res.data.results);
+  }
 }
 
 export default SuperheroService;

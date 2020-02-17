@@ -1,7 +1,7 @@
 import React from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '../../components/Grid';
-import HeroCard from './HeroCard';
+import HeroCard from '../../components/HeroCard';
 import SuperheroService from '../../services/SuperheroService';
 
 class Heroes extends React.Component {

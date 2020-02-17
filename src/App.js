@@ -11,7 +11,8 @@ import {
 } from 'react-router-dom';
 import Heroes from './pages/heroes/Heroes';
 import Hero from './pages/hero/Hero';
-import Series from './pages/series/Series';
+import Series from './pages/series/SeriesContainer';
+import ComicWrapper from './pages/comics/ComicWrapper';
 
 const App = () => (
   <div>
@@ -32,6 +33,9 @@ const App = () => (
         </Route>
         <Route path="/series/:id">
           <Series />
+        </Route>
+        <Route path="/comics/:id">
+          <ComicWrapper />
         </Route>
         <Route path="/">
           <Heroes />

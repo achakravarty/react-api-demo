@@ -4,7 +4,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import Grid from '../../components/Grid';
-import SeriesCard from './SeriesCard';
+import SeriesCard from '../../components/SeriesCard';
 import ComicCard from '../../components/ComicCard';
 import SuperheroService from '../../services/SuperheroService';
 

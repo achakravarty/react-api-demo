@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import ImageCard from '../../components/ImageCard';
+import ImageCard from './ImageCard';
 
 const SeriesCard = ({ series }) => {
   const history = useHistory();

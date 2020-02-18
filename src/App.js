@@ -9,10 +9,11 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import Heroes from './pages/heroes/Heroes';
-import Hero from './pages/hero/Hero';
+import Heroes from './pages/home/Home';
+import Hero from './pages/heroes/Hero';
 import Series from './pages/series/SeriesContainer';
 import ComicWrapper from './pages/comics/ComicWrapper';
+import Creator from './pages/creators/Creator';
 
 const App = () => (
   <div>
@@ -36,6 +37,9 @@ const App = () => (
         </Route>
         <Route path="/comics/:id">
           <ComicWrapper />
+        </Route>
+        <Route path="/creators/:id">
+          <Creator />
         </Route>
         <Route path="/">
           <Heroes />

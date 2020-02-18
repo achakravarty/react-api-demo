@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import CreatorItemLink from './CreatorItemLink';
 
 const Creators = ({ creators }) => (
   <div>
@@ -12,9 +11,7 @@ const Creators = ({ creators }) => (
     </Typography>
     <List component="nav" aria-label="secondary mailbox folders">
       {creators.map((creator) => (
-        <ListItem key={creator.name}>
-          <ListItemText primary={creator.name} />
-        </ListItem>
+        <CreatorItemLink key={creator.id} primary={creator.fullName} to={`/creators/${creator.id}`} />
       ))}
     </List>
   </div>

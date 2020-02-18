@@ -3,7 +3,7 @@ const baseURL = 'https://gateway.marvel.com';
 
 class SuperheroService {
   static getHeroes() {
-    return fetch(`${baseURL}/v1/public/characters?series=9085&apikey=${apiKey}&limit=60`)
+    return fetch(`${baseURL}/v1/public/characters?series=9085&apikey=${apiKey}&limit=50`)
       .then((res) => res.json())
       .then((res) => res.data.results);
   }
@@ -38,19 +38,19 @@ class SuperheroService {
   }
 
   static getSeriesForHero(heroId) {
-    return fetch(`${baseURL}/v1/public/characters/${heroId}/series?apikey=${apiKey}`)
+    return fetch(`${baseURL}/v1/public/characters/${heroId}/series?apikey=${apiKey}&limit=50`)
       .then((res) => res.json())
       .then((res) => res.data.results);
   }
 
   static getComicsForHero(heroId) {
-    return fetch(`${baseURL}/v1/public/characters/${heroId}/comics?apikey=${apiKey}`)
+    return fetch(`${baseURL}/v1/public/characters/${heroId}/comics?apikey=${apiKey}&limit=50`)
       .then((res) => res.json())
       .then((res) => res.data.results);
   }
 
   static getComicsInSeries(seriesId) {
-    return fetch(`${baseURL}/v1/public/series/${seriesId}/comics?apikey=${apiKey}`)
+    return fetch(`${baseURL}/v1/public/series/${seriesId}/comics?apikey=${apiKey}&limit=50`)
       .then((res) => res.json())
       .then((res) => res.data.results);
   }
@@ -62,12 +62,13 @@ class SuperheroService {
       .then((res) => Promise.all(
         [SuperheroService.getCharacters(comicId),
           SuperheroService.getEvents(comicId),
-          SuperheroService.getStories(comicId)],
-      ).then(([characters, events, stories]) => ({
+          SuperheroService.getStories(comicId),
+          SuperheroService.getCreators(comicId)],
+      ).then(([characters, events, stories, creators]) => ({
         title: res.title,
         description: res.description,
         image: `${res.thumbnail.path}.${res.thumbnail.extension}`,
-        creators: res.creators.items.map((c) => ({ name: c.name })),
+        creators,
         characters,
         events,
         stories,
@@ -88,6 +89,29 @@ class SuperheroService {
 
   static getStories(comicId) {
     return fetch(`${baseURL}/v1/public/comics/${comicId}/stories?apikey=${apiKey}`)
+      .then((res) => res.json())
+      .then((res) => res.data.results);
+  }
+
+  static getCreators(comicId) {
+    return fetch(`${baseURL}/v1/public/comics/${comicId}/creators?apikey=${apiKey}`)
+      .then((res) => res.json())
+      .then((res) => res.data.results);
+  }
+
+  static getCreator(id) {
+    return fetch(`${baseURL}/v1/public/creators/${id}?apikey=${apiKey}`)
+      .then((res) => res.json())
+      .then((res) => res.data.results[0])
+      .then((res) => SuperheroService.getSeriesByCreator(id).then((series) => ({
+        fullName: res.fullName,
+        image: `${res.thumbnail.path}.${res.thumbnail.extension}`,
+        series,
+      })));
+  }
+
+  static getSeriesByCreator(creatorId) {
+    return fetch(`${baseURL}/v1/public/creators/${creatorId}/series?apikey=${apiKey}&limit=50`)
       .then((res) => res.json())
       .then((res) => res.data.results);
   }
